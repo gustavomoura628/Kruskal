@@ -2,8 +2,8 @@
 Finds the minimum spanning tree of a weighted graph
 
 <h4>Installation:</h4>
-*make* to compile<br>
-*./kruskal* to run<br>
+make to compile<br>
+./kruskal to run<br>
 
 <h4>Controls:</h4>
 N to iterate algorithm manually<br>
