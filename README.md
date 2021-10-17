@@ -1,5 +1,5 @@
 <h1>Kruskal's Algorithm</h1>
-Finds the minimum spanning forest of a weighted graph
+Finds a minimum spanning forest of an undirected weighted graph
 
 <h4>Installation:</h4>
 make to compile<br>
