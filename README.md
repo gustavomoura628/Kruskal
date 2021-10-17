@@ -9,7 +9,6 @@ make to compile<br>
 N to iterate algorithm manually<br>
 SPACE to toggle pause<br>
 Mouse1 to move coordinate system<br>
-Mouse1 on a point to move point<br>
 Mouse2 to display coordinates of mouse pointer<br>
 Scroll Wheel to zoom<br>
 
