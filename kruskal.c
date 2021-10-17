@@ -213,7 +213,7 @@ int main(int argc, char ** argv)
 
 	//controls animation loop 
 	int close = 0; 
-	int pause = 1;
+	int pause = 0;
 
     //Declares input handling variables
 	int keyboard[1000];
