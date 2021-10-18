@@ -247,7 +247,7 @@ int main(int argc, char ** argv)
     int coormousetranslation = 0;
 
     //Initializes Points
-    int npoints = 40;
+    int npoints = 20;
     double ** points = (double**)malloc(npoints*sizeof(double*));
     for(i=0;i<npoints;i++){
         points[i] = (double*)malloc(sizeof(double)*2);
@@ -496,7 +496,7 @@ int main(int argc, char ** argv)
         if(!LinkedList_isEmpty(GEdges) && (!pause && counter % (200/npoints + 1) == (200/npoints + 1)-1 || keyboardonce[SDL_SCANCODE_N])){
             int u = GEdges->next->u;
             int v = GEdges->next->v;
-            int w = GEdges->next->weight;
+            double w = GEdges->next->weight;
 
             if(FindSet(UnionArray[u]) != FindSet(UnionArray[v])){
                 LinkedList_Insert(FEdges, LinkedList_Create(u,v,w));

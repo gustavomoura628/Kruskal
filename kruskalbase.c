@@ -85,80 +85,63 @@ void LinkedList_Print(LinkedList * root){
         node = node->next;
     }
 }
+void LinkedList_GetDataOfFirst(LinkedList * ll, int * u,int * v,double * w){
+        *u = ll->next->u;
+        *v = ll->next->v;
+        *w = ll->next->weight;
+}
+
 int main(){
     char buffer[1000];
-    int NumberOfVertices = 10;
+    int NumberOfVertices;
+    printf("Insira o número de vértices: ");
     fgets(buffer,1000,stdin);
     sscanf(buffer,"%d",&NumberOfVertices);
-    printf("NumberOfVertices = %d\n", NumberOfVertices);
+    //printf("NumberOfVertices = %d\n", NumberOfVertices);
+    
+    //Inicializa os vertices do grafo com MakeSet
     Node ** UnionArray = (Node**)malloc(NumberOfVertices * sizeof(Node*));
     int i;
     for(i=0;i<NumberOfVertices;i++){
         UnionArray[i] = MakeSet();
     }
 
-    int NumberOfEdges = 5;
+    int NumberOfEdges;
+    printf("Insira o número de arestas: ");
     fgets(buffer,1000,stdin);
     sscanf(buffer,"%d",&NumberOfEdges);
-    printf("NumberOfEdges = %d\n", NumberOfEdges);
+    //printf("NumberOfEdges = %d\n", NumberOfEdges);
+
+    //Cria a linked list que recebe as arestas
     LinkedList * GEdges = LinkedList_Create(0,0,0);
+    printf("Insira as arestas no formato 'u v peso': \n");
     for(i=0;i<NumberOfEdges;i++){
         int u,v;
         double w;
-
+        
         fgets(buffer,1000,stdin);
         sscanf(buffer,"%d %d %lf",&u,&v,&w);
-        printf("Read %d %d %lf\n",u,v,w);
+        //printf("Read %d %d %lf\n",u,v,w);
+        //Insere cada aresta ordenando por weight
         LinkedList_InsertSort(GEdges, LinkedList_Create(u,v,w));
-        printf("Inserted:\n");
-        LinkedList_Print(GEdges);
+        //printf("Inserted:\n");
+        //LinkedList_Print(GEdges);
     }
+    //Cria o conjunto de arestas F
     LinkedList * FEdges = LinkedList_Create(0,0,0);
+
+    //Executa o algoritimo de Kruskal
+    int u,v;
+    double w;
     while(!LinkedList_isEmpty(GEdges)){
-        int u = GEdges->next->u;
-        int v = GEdges->next->v;
-        int w = GEdges->next->weight;
+        LinkedList_GetDataOfFirst(GEdges,&u,&v,&w);
         if(FindSet(UnionArray[u]) != FindSet(UnionArray[v])){
             LinkedList_Insert(FEdges, LinkedList_Create(u,v,w));
             Union(UnionArray[u],UnionArray[v]);
         }
         LinkedList_RemoveFirst(GEdges);
     }
-    printf("Minimum Spanning Tree:\n");
+
+    printf("Árvore de extensão mínima:\n");
     LinkedList_Print(FEdges);
 }
-//int main(){
-//    int N;
-//    int K;
-//    scanf("%d %d", &N,&K);
-//    int i;
-//    Node ** banks = (Node**)malloc(N*sizeof(Node*));
-//    int t;
-//    for(i=0;i<N;i++){
-//        scanf("%d",&t);
-//        banks[i] = MakeSet();
-//    }
-//    int A,B;
-//    char O;
-//    char buffer[100];
-//    for(i=0;i<K;i++){
-//        fgets(buffer,100,stdin);
-//        sscanf(buffer,"%c %d %d", &O, &A,&B);
-//        //printf("O = %c, A = %d, B = %d\n",O,A,B);
-//
-//        A--;
-//        B--;
-//        if(O=='F'){
-//            Union(banks[A],banks[B]);
-//        }else if(O=='C'){
-//            if(FindSet(banks[A])==FindSet(banks[B]))printf("S\n");
-//            else printf("N\n");
-//        }
-//
-//    }
-//    for(i=0;i<N;i++){
-//        free(banks[i]);
-//    }
-//    free(banks);
-//    return 0;
-//}
